@@ -12,12 +12,14 @@ import java.util.Scanner;
 public class Curl {
     public static void main(String[] args) {
 
+        //Getting our website URL in a String and checking if it's absolute (if it starts with the protocol - ex.: "http://...")
         String websiteURLText = checkAbsolute();
 
         try {
-
+            // Creating our URL variable using URI
             URL websiteURL = new URI(websiteURLText).toURL();
-            System.out.println(websiteURL.openConnection().getContentType());
+
+            // If our website has content and if we get an InputStream from it, reads it and prints to console all its content
             if (websiteURL.openConnection().getContentType() != null && websiteURL.getContent() instanceof InputStream) {
                 BufferedInputStream in = new BufferedInputStream((InputStream) websiteURL.getContent());
                 System.out.println(new String(in.readAllBytes()));
